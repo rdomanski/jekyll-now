@@ -7,7 +7,7 @@ Texas Instruments TM4C123G
 
 ## Introduction
 
-Microcontrollers are small processing units that are widely used in todays electronics. MCUs are usually used for very specific and dedicated tasks. Therefore they are usually very limited in resource aspects (speed, memory) to reduce its cost and make it more reliable. They are found in many critcal fields of technology such as automotive, space industry or medical devices. 
+Microcontrollers are small processing units that are widely used in todays electronics. MCUs are usually used for very specific and dedicated tasks. Therefore, they are usually very limited in resource aspects (speed, memory) to reduce their cost and make them more reliable. They are found in many critcal fields of technology such as automotive, space industry or medical devices. 
 
 Key characteristics of microcontrollers:
 
@@ -15,7 +15,7 @@ Key characteristics of microcontrollers:
 * in many cases no operating system
 * interrupts
 
-Reverse engineering of the MCU firmware is different from a typical ARM binary. There is no header for IDA to recognize sections and segments, no file system, all the memory space is flat. Hardware specific operation and very low level hardware interoperation makes reversing an MCU firmware more complicated. This article explains one of the approaches a researcher can take to successfully load an MCU firmware into IDA Pro and start reversing. The process is described based on the Texas Instruments Tivia C series board and one of the labs available on EDX in the course "Embedded Systems - Shape The World: Microcontroller Input/Output". A "hello world" example in the Microcontrollers world. 
+Reverse engineering of the MCU firmware is different from a typical ARM binary. There is no header for IDA to recognize sections and segments, no file system, all the memory space is flat. Hardware specific operation and very low level hardware interoperation makes reversing an MCU firmware more complicated. This article explains one of the approaches a researcher can take to successfully load an MCU firmware into IDA Pro and start reversing. The process is described based on the Texas Instruments Tivia C series board and one of the labs available on EDX in the course "Embedded Systems - Shape The World: Microcontroller Input/Output". A "hello world" example in the Microcontrollers' world. 
 
 The processes of obtaining a firmware from the chip is out of scope of this article. 
 
