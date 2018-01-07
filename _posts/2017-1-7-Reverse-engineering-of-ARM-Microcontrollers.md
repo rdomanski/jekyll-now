@@ -3,8 +3,7 @@ layout: post
 title: Reverse engineering of ARM microcontrollers
 ---
 
-# Reverse engineering of ARM microcontrollers
-### Texas Instruments TM4C123G
+Texas Instruments TM4C123G
 
 ## Introduction
 
