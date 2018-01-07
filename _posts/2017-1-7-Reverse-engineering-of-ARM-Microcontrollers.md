@@ -36,7 +36,7 @@ At this stage IDA is unable to recognize the file. Little help is needed :)
 
 My first step is to identify the type of processor of the target. Looking at the datasheet for Texas Instruments TM4C123G MCU overview:
 
-<img src="./pics/MCU_overview.png" width="700">
+<img src="{{site.baseurl}}/files/2017-1-7/MCU_overview.png" width="700">
 
 So the MCU is an ARM Coretex-M4F and wiki page provides more information about the ARM processor:
 
@@ -61,15 +61,15 @@ With this information following steps can be taken:
 * Set *Base architecture* to *ARMv7-M* and *Thumb* In the *Thumb instructions*
 * At this stage I tend to disable the Analysis. 
 
- <img src="./pics/IDA_load4.png" width="700">
+ <img src="{{site.baseurl}}/files/2017-1-7/IDA_load4.png" width="700">
 
 In the next step IDA asks for the RAM and ROM addresses. The actual values can be found in the datasheet again. It is usually referenced as 'memory map'. 
 
-<img src="./pics/memory_map.png" width="700">
+<img src="{{site.baseurl}}/files/2017-1-7/memory_map.png" width="700">
 
 We know the start and end address (size) of the ROM and ROM sections. It it not uncommon to see that sections larger then the actual firmware but nevertheless I prefer to set it according to the datasheet specification as it helps in the reverse engineering process. 
 
-<img src="./pics/memory_organization.png" width="300">
+<img src="{{site.baseurl}}/files/2017-1-7/memory_organization.png" width="300">
 
 IDA loads and presents a loaded firmware in the ROM section. 
 
@@ -79,11 +79,11 @@ Microcontrollers implement special data structure called **Vector Table**. They 
 
 Datasheets usually provide quite detailed description of the Vector Table. An example of Vector Table for Texas Instruments TM4C123G:
 
-<img src="./pics/vector_table_ti.png" width="500">
+<img src="{{site.baseurl}}/files/2017-1-7/vector_table_ti.png" width="500">
 
 It confirms what is seen in IDA:
 
-<img src="./pics/vector_table_IDA.png" width="500">
+<img src="{{site.baseurl}}/files/2017-1-7/vector_table_IDA.png" width="500">
 
 So the Reset handler points to the **0x26D** as a first ARM instruction. But be careful! The first instruction is in fact at Offset **0x26C**. As the manual states:
 
@@ -91,11 +91,11 @@ So the Reset handler points to the **0x26D** as a first ARM instruction. But be 
 
 Having this in mind, it is required to mark the rest of the code as Thumb. Navigate to 0x26C and press *alt-G*. In the *Segment Register Value* select 'T' for Thumb and set *Value* to 0x1, which means Thumb mode enabled. 
 
-<img src="./pics/thumb.png" width="500">
+<img src="{{site.baseurl}}/files/2017-1-7/thumb.png" width="500">
 
 Now is the moment when I usually hit the autoanalysis button. And we have more familiar view of the IDA :)
 
-<img src="./pics/autoanalysis.png" width="600">
+<img src="{{site.baseurl}}/files/2017-1-7/autoanalysis.png" width="600">
 
 ## Memory mapped I/O
 
@@ -103,11 +103,11 @@ Microcontrollers use the same address space for I/O devices and the memory. It m
 
 Example in IDA:
 
-<img src="./pics/sub_3E0.png" width="600">
+<img src="{{site.baseurl}}/files/2017-1-7/sub_3E0.png" width="600">
 
 All the addresses of **0x400-** are mapped to the peripherals. The list of memory regions is available in the datasheet. I wrote a script that creates segments to the corresponding peripherals. It simplifies reverse engineering. The script can be found in the github repository (URL). 
 
-<img src="./pics/segments.png" width="600">
+<img src="{{site.baseurl}}/files/2017-1-7/segments.png" width="600">
 
 Lets focus on the first few instructions:
 
@@ -122,7 +122,7 @@ ROM:000003E6                 ORR.W           R0, R0, #0x20
 > This register controls the clock gating logic in normal Run mode. Each bit controls a clock enable for a given interface, function, or module. If set, the module receives a clock and functions. Otherwise, the module is unclocked and disabled (saving power).
 
 
-<img src="./pics/RCGC2.png" width="600">
+<img src="{{site.baseurl}}/files/2017-1-7/RCGC2.png" width="600">
 
 *Note: I only have the legacy RO picture of the RCGC2 register.*
 
@@ -148,7 +148,7 @@ ROM:0000041C                 STR             R0, [R1]
 
 The main function of the microconroller presented in the graph mode: 
 
-<img src="./pics/main.png" width="600">
+<img src="{{site.baseurl}}/files/2017-1-7/main.png" width="600">
 
 First, sub\_3E0 function is called. This is the function that was explained in the previous section. The sub\_324 can be skipped at this stage. 
 
@@ -193,15 +193,15 @@ At the end of the loop there is a call to sub_3C4 function. This function is not
 
 At this point the main function has been successfully reversed. It is clear what the instructions are doing - initializing pins, setting some pins, delaying instructions.  
 
-<img src="./pics/main_reversed.png" width="600">
+<img src="{{site.baseurl}}/files/2017-1-7/main_reversed.png" width="600">
 
 Such an information is only partially useful. Applying additional logic to what is known already would be helpful. The board that is being analyzed is the Texas Instruments Tiva C LaunchPad. It is a proto board with an ARM microcontroller. From the datasheet of the Tiva C board it can be read that the GPIO Port F is connected to the RGB LED and 2 physical switches.
 
-<img src="./pics/tivialedandswitches.png" width="600">
+<img src="{{site.baseurl}}/files/2017-1-7/tivialedandswitches.png" width="600">
 
 This information sheds new light on the logic of the program. Same function as before but now with comments about the logic of the operation:
 
-<img src="./pics/main_logic.png" width="600">
+<img src="{{site.baseurl}}/files/2017-1-7/main_logic.png" width="600">
 
 In short, the program reads the status of Switch1 (Pressed = 0, Unpressed = 1). If the SW1 is pressed the LED is turned Red. Otherwise the LED is turned Green. After the time delay is elapsed the LED is turned Blue. The loop starts from the beginning.
 
@@ -213,5 +213,5 @@ The example presented here was a very simple one, can be seen as a "Hello World"
 
 And the example of a working MCU:
 
-<img src="./pics/led.gif" width="600">
+<img src="{{site.baseurl}}/files/2017-1-7/led.gif" width="600">
 
