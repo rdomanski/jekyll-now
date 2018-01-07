@@ -30,7 +30,7 @@ Firmware of the MCU is usually a flat binary file. It means there are no ELF (or
 
 When loading the binary firmware IDA greets with a window:
 
-<img src="./pics/IDA_load.png" width="500">
+<img src="{{site.baseurl}}/files/2017-1-7/IDA_load.png" width="500">
 
 At this stage IDA is unable to recognize the file. Little help is needed :) 
 
