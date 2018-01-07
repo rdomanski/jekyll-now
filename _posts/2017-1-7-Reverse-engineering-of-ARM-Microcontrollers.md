@@ -22,7 +22,7 @@ The processes of obtaining a firmware from the chip is out of scope of this arti
 
 Texas Instruments Tivia C series Launchpad:
 
-<img src="./2017-1-7-files/tivia.jpg" width="250">
+<img src="{{site.baseurl}}/files/2017-1-7/tivia.jpg" width="250">
 
 ## Loading firmware to IDA Pro
 
