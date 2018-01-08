@@ -105,7 +105,7 @@ Example in IDA:
 
 <img src="{{site.baseurl}}/files/2017-1-7/sub_3E0.png" width="600">
 
-All the addresses of **0x400-** are mapped to the peripherals. The list of memory regions is available in the datasheet. I wrote a script that creates segments to the corresponding peripherals. It simplifies reverse engineering. The script can be found in the github repository (URL). 
+All the addresses of **0x400-** are mapped to the peripherals. The list of memory regions is available in the datasheet. I wrote a script that creates segments to the corresponding peripherals. It simplifies reverse engineering. The script can be found in the github repository: [segments.py](https://raw.githubusercontent.com/rdomanski/rdomanski.github.io/master/files/2017-1-7/segments.py). 
 
 <img src="{{site.baseurl}}/files/2017-1-7/segments.png" width="600">
 
