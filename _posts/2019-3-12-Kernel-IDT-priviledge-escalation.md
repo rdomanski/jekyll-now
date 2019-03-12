@@ -3,7 +3,9 @@ layout: post
 title: Kernel IDT priviledge escalation
 ---
 
-# Kernel IDT priviledge escalation
+Kernel IDT priviledge escalation
+
+# Introduction
 
 This article presents how to achieve a privilege escalation by overwriting IDT structure. The presented technique is based on the known CVE-2013-2094. The walkthrough and explanation is based on the available exploit written by Vitaly Nikolenko for x86_64 architecture. <https://www.exploit-db.com/exploits/33589>
 
